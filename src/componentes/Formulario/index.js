@@ -1,69 +1,85 @@
-import './Formulario.css'
-import CampoTexto from '../CampoTexto';
-import ListaSuspensa from '../ListaSuspensa';
-import Botao from '../Botao';
-import { useState } from 'react';
-const Formulario = (props) => {
+import { useState } from 'react'
+import Botao from '../Botao'
+import Campo from '../Campo'
+import ListaSuspensa from '../ListaSuspensa'
+import './formulario.css'
+
+const Formulario = ({aoCadastrar, times, cadastrarTime}) => {
 
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
-    const [time, setTime] = useState(props.times[0] || '')
+    const [time, setTime] = useState('')
+    const [nomeTime, setNomeTime] = useState('')
+    const [corTime, setCorTime] = useState('')
 
-    const aoSalvar = (evento) => {
+    const aoSubmeter = (evento) => {
         evento.preventDefault()
-        // console.log('O form foi submetido => ', nome, cargo, imagem, time)
-        props.aoColaboradorCadastrado ({
-            nome, //se colocar (nome: nome) para criar daria no mesmo, ele ja meio q faz isso automaticamente
+        console.log('form enviado', nome, cargo, imagem, time )
+        aoCadastrar({
+            nome,
             cargo,
             imagem,
             time
         })
-        setNome('')
-        setCargo('')
-        setImagem('')
-        setTime(props.times[0] || '')
     }
 
-    return(
-        <section className='formulario'>
-            <form onSubmit={aoSalvar}>
-                <h2>Preencha os dados para criar o card do colaborador</h2>
-                <CampoTexto
-                    obrigatorio={true} 
+    const aoSubmeterTime = (evento) => {
+        evento.preventDefault()
+        cadastrarTime({
+            nome: nomeTime,
+            cor: corTime
+        })
+
+    }
+
+    return (
+        <section className="formulario-container">
+            <form className="formulario" onSubmit={aoSubmeter}>
+                <h2>Preencha os dados para criar o card do colaborador.</h2>
+                <Campo
+                    obrigatorio={true}
+                    label='Nome'
+                    placeholder='Digite seu nome '
                     valor={nome}
-                    label="Nome"
-                    placeholder="nome"
-                    aoAlterado={valor => setNome(valor)}
-                />
-                <CampoTexto
-                    obrigatorio={true} 
+                    aoAlterado={valor => setNome(valor)}/>
+                <Campo
+                    obrigatorio={true}
+                    label='Cargo' 
+                    placeholder='Digite seu cargo '
                     valor={cargo}
-                    label="Cargo"
-                    placeholder="cargo"
-                    aoAlterado={valor => setCargo(valor)}
-                />
-                <CampoTexto 
-                    valor={imagem} 
-                    label="Imagem" 
-                    placeholder="endereço da imagem" 
-                    aoAlterado={valor => setImagem(valor)} 
-                />
+                    aoAlterado={valor => setCargo(valor)}/>
+                <Campo 
+                    label='Imagem' 
+                    placeholder='Informe o endereço da imagem '
+                    aoAlterado={valor => setImagem(valor)}/>
                 <ListaSuspensa 
-                    obrigatorio={true} 
-                    valor={time} 
-                    label="Time" 
-                    itens={props.times} 
-                    aoAlterado={valor => setTime(valor)} 
-                />
-                <Botao>
-                    Criar Card
-                </Botao>
+                    obrigatorio={true}
+                    label='Times'
+                    items={times} 
+                    valor={time}
+                    aoAlterado={valor => setTime(valor)}/>
+                <Botao texto='Criar card' />
+            </form>
+            <form className="formulario" onSubmit={aoSubmeterTime}>
+                <h2>Preencha os dados para criar um time.</h2>
+                <Campo
+                    obrigatorio={true}
+                    label='Nome'
+                    placeholder='Digite o nome do time'
+                    valor={nomeTime}
+                    aoAlterado={valor => setNomeTime(valor)}/>
+                <Campo
+                    obrigatorio={true}
+                    type='color'
+                    label='Cor' 
+                    placeholder='Digite a cor do Time'
+                    valor={corTime}
+                    aoAlterado={valor => setCorTime(valor)}/>
+                <Botao texto='Criar Time' />
             </form>
         </section>
-    );
-
-
+    )
 }
 
 export default Formulario

@@ -1,23 +1,23 @@
 .colaborador {
+    position: relative;
     width: 280px;
 }
 
 .colaborador .cabecalho {
-    background-color: #F0F0F0;
-    border-radius: 50px 50px 0px 0px;
+    background-color:  #F0F0F0;
+    border-radius: 10px 10px 0px 0px;
 }
-
 .colaborador img {
     width: 100px;
     border-radius: 50%;
     position: relative;
-    top: 50px;
+    bottom: -50px;
 }
 
 .colaborador .rodape {
     background: #FFFFFF;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 0px 0px 20px 20px;
+    border-radius: 0px 0px 10px 10px;
     padding-top: 90px;
     padding-bottom: 40px;
 }
@@ -36,3 +36,47 @@
     color: #212121;
     padding: 0 16px;
 }
+
+.deletar {
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    cursor: pointer;
+    transition: color 0.6s ease, transform 0.4s ease;
+
+}
+
+.deletar:hover{
+    color: red;
+    transform: scale(1.1)
+}
+
+.favorito{
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    cursor: pointer;
+    transition: color 0.6s ease, transform 0.4s ease;
+    color: red;
+}
+
+.nfavorito{
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    cursor: pointer;
+    transition: color 0.6s ease, transform 0.4s ease;
+    color: black;
+}
+
+.nfavorito:hover{
+    transform: scale(1.1);
+    color: red; 
+}
+.favorito:hover{
+    transform: scale(0.9);
+    color: black;
+}
+
+
+
