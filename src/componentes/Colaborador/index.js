@@ -14,21 +14,24 @@ const Colaborador = ({ colaborador, corDeFundo, aoDeletar, aoFavoritar }) => {
             className='deletar' 
             onClick={() => aoDeletar(colaborador.id_colab)} 
         />
-
-        <div className="favoritar">
-            {colaborador.favorito
-                ? <MdFavorite size={25} className="favorito" onClick={favoritar}/>
-                : <MdFavoriteBorder size={25} className="nfavorito" onClick={favoritar}/>
-            }
-        </div>
-
         <div className="cabecalho" style={{ backgroundColor: corDeFundo }}>
             <img src={colaborador.imagem} alt={colaborador.nome} />
         </div>
+
         <div className="rodape">
             <h4>{colaborador.nome}</h4>
             <h5>{colaborador.cargo}</h5>
+
+            <div className="favoritar">
+                {colaborador.favorito
+                    ? <MdFavorite size={25} className="favorito" onClick={favoritar}/>
+                    : <MdFavoriteBorder size={25} className="nfavorito" onClick={favoritar}/>
+                }
+            </div>
         </div>
+
+
+
     </div>)
 }
 
